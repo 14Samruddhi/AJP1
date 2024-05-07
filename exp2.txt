@@ -1,0 +1,78 @@
+
+                                                             EXP-2
+Code:
+package exp22;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class Exp2  extends Frame implements MouseListener{
+	
+
+	Label l;
+	Exp2(){ 
+		
+	
+		
+		l=new Label();
+		l.setBounds(25,60,280,30);
+		l.setAlignment(Label.CENTER);
+		
+		this.setBackground(Color.pink);
+		this.add(l);
+		
+		this.setSize(300,300);
+		this.setLayout(null);
+		this.setVisible(true);
+		this.addMouseListener(this);
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				
+				System.exit(0);
+			}
+		});
+		
+		
+	}
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new Exp2();
+
+	}
+	
+	public void mouseClicked(MouseEvent e) {
+		l.setText("Mouse clicked");
+		l.setBackground(Color.YELLOW);
+		
+		
+	}
+	public void mouseEntered(MouseEvent e) {
+		l.setText("Mouse entered");
+		l.setBackground(Color.PINK);
+		
+	}
+	public void mouseExited(MouseEvent e) {
+		l.setText("Mouse Exited");
+		l.setBackground(Color.pink);
+		
+	}
+	public void mousePressed(MouseEvent e) {
+		
+		
+	}
+	public void mouseReleased(MouseEvent e) {
+		
+		
+	}
+ 
+
+
+
+}
+
+  
+ 
