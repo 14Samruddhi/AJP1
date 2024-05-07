@@ -1,0 +1,114 @@
+ package Login_page;
+
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+/**
+ * Servlet implementation class Java
+ */
+public class Java extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Java() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see Servlet#init(ServletConfig)
+	 */
+	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter pw = response.getWriter();
+		String x = request.getParameter("user");
+		String y = request.getParameter("pwd");
+		
+		if(x.equals("admin") && y.equals("admin")) {
+			pw.println("<h1>Login Successful</h1>");
+		}
+		else {
+			pw.println("<h1>Login Failed</h1>");
+		}
+	}
+
+
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
+	 */
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	}
+
+}
+
+
+
+
+
+indx.html:(code)
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Login form</title>
+</head>
+<body>
+<form name="Login Form" method="post" action="Java">
+	<br><br><br><br><br>
+	<table align="center"> 
+	<font color="blue" cellspacing=0 height=120>	
+	
+	<tr><td align="center"><font color="blue" size="10">LOGIN FORM</font></td></tr>
+	<tr><td>UserName<input type="text" name="user"></td></tr>
+	<tr><td>Password<input type="password" name="pwd"></td></tr>
+	<tr><td><input type="Submit" value="LOGIN"></td></tr>
+	<tr><td><input type="Reset" value="RESET"></td></tr>
+	
+	</font>
+	
+	</table>
+</form>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
