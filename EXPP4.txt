@@ -1,0 +1,40 @@
+ 
+CODE: 
+package EXP4; 
+ 
+import java.sql.*; 
+ 
+public class Exp4 { 
+ private static final String URL = "jdbc:mysql://localhost:3306/AJP_JDBC_EXP"; 
+ private static final String USER = "root"; 
+ private static final String PASS = "root"; 
+ 
+ public static void main(String[] args) throws Exception { 
+  //Open a connection 
+  try { 
+   Class.forName("com.mysql.cj.jdbc.Driver"); 
+   Connection conn = DriverManager.getConnection(URL, USER, PASS); 
+   Statement stmt = conn.createStatement(); 
+    
+   System.out.println("Inserting records into the table... "); 
+   String sql = "INSERT INTO College VALUES(100, 'Sachin', 'Tendulkar', 
+18)"; 
+   stmt.executeUpdate(sql); 
+   sql = "INSERT INTO College VALUES(101, 'Virat', 'Kohli', 25)"; 
+   stmt.executeUpdate(sql); 
+   sql = "INSERT INTO College VALUES(102, 'Mahendra Singh', 'Dhoni', 
+18)";
+ 
+stmt.executeUpdate(sql); 
+sql = "INSERT INTO College VALUES(103, 'Rohit', 'Sharma', 18)"; 
+stmt.executeUpdate(sql); 
+System.out.println("Records inserted"); 
+} 
+catch(SQLException e) { 
+e.printStackTrace(); 
+} 
+} 
+} 
+Output: 
+Inserting records into the table...  
+Records inserted 
