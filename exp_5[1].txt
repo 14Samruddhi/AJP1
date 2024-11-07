@@ -1,80 +1,69 @@
-one.java::
+//one.java 
 
-import java.rmi.*;
-interface one extends Remote
-{
-public int palin(String a) throws RemoteException;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface one extends Remote {
+    int palin(String a) throws RemoteException;
 }
 
 
 
 
 
-
-
-
-two.java::
+// two.java
 
 import java.rmi.*;
-import java.lang.*;
 import java.rmi.server.*;
-public class two extends UnicastRemoteObject implements one
-{
-public two() throws RemoteException { }
-public int palin(String a) throws RemoteException
-{
-System.out.println("Hello");
-StringBuffer str = new StringBuffer(a);
-String str1 = str.toString();
-System.out.println("Print : " + str1.toString());
-StringBuffer str2 = str.reverse();
-System.out.println("Print : " + str2.toString());
-int b = str1.compareTo(str2.toString());
-System.out.println("Print : " + b);
-if (b == 0)
-return 1;
-else
-return 0;
+
+public class two extends UnicastRemoteObject implements one {
+    public two() throws RemoteException { }
+
+    public int palin(String a) throws RemoteException {
+        System.out.println("Hello");
+        StringBuffer str = new StringBuffer(a);
+        String str1 = str.toString();
+        System.out.println("Original String: " + str1);
+
+        StringBuffer str2 = str.reverse();
+        System.out.println("Reversed String: " + str2.toString());
+
+        int result = str1.compareTo(str2.toString());
+
+        if (result == 0) {
+            return 1; // Palindrome
+        } else {
+            return 0; // Not a palindrome
+        }
+    }
 }
-}
 
 
 
 
 
-
-
-
-rmiserver.java::
+//rmiserver.java
 
 import java.io.*;
 import java.rmi.*;
+import java.rmi.server.*;
 import java.net.*;
-public class rmiserver
-{
-public static void main(String args[]) throws Exception
-{
-try
-{
-two twox = new two();
-Naming.bind("palin", twox);
-System.out.println("Object registered");
-}
-catch(Exception e)
-{
-System.out.println("Exception" + e);
-}
-}
+
+public class rmiserver {
+    public static void main(String args[]) throws Exception {
+        try {
+            // Create instance of 'two' class which implements 'one' interface
+            one twox = new two();  // Make sure 'two' implements 'one' interface
+            Naming.rebind("palin", twox); // Bind the object to RMI registry
+            System.out.println("Object registered");
+        } catch (Exception e) {
+            System.out.println("Exception: " + e);
+        }
+    }
 }
 
 
-
-
-
-
-
-
-rmiclient.java::
+//rmiclient.java
 
 import java.io.*;
 import java.rmi.*;
@@ -104,33 +93,3 @@ System.out.println("Exception" + e);
 }
 }
 }
-
-
-
-
-
-
-
-OUTPUT 1: 
-PS C:\Users\sai\Desktop\Reshma> javac *.java  
-PS C:\Users\sai\Desktop\Reshma> rmic two
-Warning: generation and use of skeletons and static stubs for JRMP
-is deprecated. Skeletons are unnecessary, and static stubs have
-been superseded by dynamically generated stubs. Users are
-encouraged to migrate away from using rmic to generate skeletons and static
-stubs. See the documentation for java.rmi.server.UnicastRemoteObject.      
-PS C:\Users\sai\Desktop\Reshma> start rmiregistry
-PS C:\Users\sai\Desktop\Reshma> java rmiclient
-Print : 1
-The given string is a Palindrome
-PS C:\Users\sai\Desktop\Reshma> 
-OUTPUT:2
-C:\Users\sai\Desktop\Reshma>java rmiserver
-Object registered
-Hello
-Print : madam
-Print : madam
-Print : 0
-
-
-
